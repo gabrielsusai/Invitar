@@ -1,47 +1,143 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
+    <title>@ViewBag.Title - Invitar</title>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Invitar</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/headers/header1.css" />
+    <link rel="stylesheet" href="../../assets/css/responsive.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../assets/plugins/flexslider/flexslider.css" />
+    <link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css" />
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="../../assets/css/themes/default.css" />
+    <link rel="stylesheet" href="../../assets/css/themes/headers/default.css" />
+
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+
+    <!--=== Top ===-->
+    <div class="top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Invitar", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                </ul>
+            <ul class="loginbar pull-right">
+                <li><a href="page_faq.html">Help</a></li>
+                <li class="devider"></li>
                 @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
+    </div><!--/top-->
+    <!--=== End Top ===-->
+    <!--=== Header ===-->
+    <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img id="logo-header" src="../../assets/img/logo1-default.png" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+                                @Html.ActionLink("Home", "Index", "Home")
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+                                @Html.ActionLink("About", "About", "Home")
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+                                @Html.ActionLink("Contact", "Contact", "Home")
+                            </a>
+                        </li>
+                        <li class="hidden-sm"><a class="search"><i class="icon-search search-btn"></i></a></li>
+                    </ul>
+                    <div class="search-open">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button class="btn-u" type="button">Go</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div>
+                </div><!-- /navbar-collapse -->
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </div><!--/header-->
+    <!--=== End Header ===-->
+    <!--=== Content Part  ===-->
+    <div class="container">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Invitar. All rights reserved. Follow us on
-            <a rel="external" href="http://facebook.com/invitartu"><img src="../Images/fb.png" /></a>
-            
-            </p>
-        </footer>
-    </div>
+    </div><!--/container-->
+    <!--=== End Content Part
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <!--=== Footer ===-->
+    <div class="footer">
+        <div class="container">
+            THIS IS FOOTER
+        </div><!--/container-->
+    </div><!--/footer-->
+    <!--=== End Footer ===-->
+    <!--=== Copyright ===-->
+    <div class="copyright">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Invitar. All rights reserved. Follow us on
+            <a rel="external" href="http://facebook.com/invitartu"><img src="../Images/fb.png" /></a>
+        </div><!--/container-->
+    </div><!--/copyright-->
+    <!--=== End Copyright ===-->
+    <!-- JS Global Compulsory -->
+    <script src="../../assets/plugins/jquery-1.10.2.min.js"></script>
+    <script src="../../assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../assets/plugins/hover-dropdown.min.js"></script>
+    <script src="../../assets/plugins/back-to-top.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="../../assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+    <script src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+    <script src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+    <!-- JS Page Level -->
+    <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/pages/index.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            App.initSliders();
+            Index.initParallaxSlider();
+        });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="../../assets/js/respond.js"></script>
+    <![endif]-->
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

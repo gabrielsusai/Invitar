@@ -1,5 +1,6 @@
 namespace Invitar.Migrations
 {
+    using Invitar.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +15,13 @@ namespace Invitar.Migrations
 
         protected override void Seed(Invitar.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Database.ExecuteSqlCommand("Delete from Events");
+            context.Events.AddOrUpdate(
+                new Event { Title="Birthday", Location="1501 St Paul Street", StartDate= DateTime.Now.AddDays(-10), StartTime = DateTime.Now.ToString("hh:mm tt"), Description ="First Birthday", HideGuest=false, InviteOtherGuest= false , Image= new byte[]{} },
+                new Event { Title = "Baby Shower", Location = "123 Ram Street", StartDate = DateTime.Now.AddDays(-50), StartTime = DateTime.Now.ToString("hh:mm tt"), Description = "Baby Shower", HideGuest = false, InviteOtherGuest = false, Image = new byte[] { } },
+                new Event { Title = "Graduation", Location = "77 Washington Street", StartDate = DateTime.Now.AddDays(-80), StartTime = DateTime.Now.ToString("hh:mm tt"), Description = "Graduation from Towson", HideGuest = false, InviteOtherGuest = false, Image = new byte[] { } },
+                new Event { Title = "Farewell", Location = "098 Steele Rd", StartDate = DateTime.Now.AddDays(-50), StartTime = DateTime.Now.ToString("hh:mm tt"), Description = "Farwell from Office", HideGuest = false, InviteOtherGuest = false, Image = new byte[] { } }
+                );  
         }
     }
 }
