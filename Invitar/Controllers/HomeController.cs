@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Invitar.Models;
 
 namespace Invitar.Controllers
 {
@@ -10,7 +11,8 @@ namespace Invitar.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var events = (new ApplicationDbContext()).Events.ToList();
+            return View(events);
         }
 
         public ActionResult About()
