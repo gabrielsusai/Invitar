@@ -3,7 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
     <div class="container">
@@ -14,6 +13,12 @@
 
 <div class="col-md-9">
     NO UPCOMING EVENTS
+</div>
+
+<div class="col-md-offset-2 col-md-10">
+    <div style="position: absolute; bottom: 0; right: 0;">
+        <input type="button" value="Create an Event" class="btn-u btn" onclick="@("window.location.href='" + @Url.Action("Create", "Event") + "'");" />
+    </div>
 </div>
 
 <!--=== Breadcrumbs ===-->
