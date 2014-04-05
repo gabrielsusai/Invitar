@@ -1,0 +1,13 @@
+﻿@model IEnumerable<String>
+
+<a href="/Event/Photo" class="btn btn-primary">Back</a>
+<ul class="gallery">
+    @foreach (var item in Model)
+    {
+        <li>
+            <img class="img-photo" style="width:22em; height:13em;" src=@item alt="">
+        </li>
+    }
+</ul>
+
+

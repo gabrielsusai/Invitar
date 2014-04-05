@@ -1,0 +1,12 @@
+﻿@model IEnumerable<String>
+
+<ul class="gallery">
+    @foreach (var item in Model)
+    {
+        <li>
+            <img class="img-photo" style="width:22em; height:15em;" src=@item alt="">
+        </li>
+    }
+</ul>
+
+

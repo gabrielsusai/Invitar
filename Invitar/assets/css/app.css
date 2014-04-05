@@ -13,6 +13,7 @@
 }
 
 body { 
+    background:url(../../assets/img/bg/bg-gallery.jpg);background-repeat:repeat;font-family:DIN,sans-serif;
    color: #333; 
    font-size: 13px;
    line-height: 1.6;

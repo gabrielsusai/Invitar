@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="../../assets/css/themes/default.css" />
     <link rel="stylesheet" href="../../assets/css/themes/headers/default.css" />
 
+    <link rel="stylesheet" href="~/content/site.css" />
 
     @*@Scripts.Render("~/bundles/modernizr")*@
 
@@ -126,6 +127,7 @@
     <!-- JS Page Level -->
     <script src="../../assets/js/app.js"></script>
     <script src="../../assets/js/pages/index.js"></script>
+    <script src="~/scripts//custom.js"></script>
     <script>
         jQuery(document).ready(function () {
             App.init();
@@ -136,8 +138,9 @@
     <!--[if lt IE 9]>
         <script src="../../assets/js/respond.js"></script>
     <![endif]-->
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    @*    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>
