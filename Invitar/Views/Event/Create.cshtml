@@ -1,0 +1,141 @@
+﻿@model Invitar.Models.Event
+
+@{
+    ViewBag.Title = "Create an Invitation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create an Invitation</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Event</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+           @Html.LabelFor(model => model.Title, "Event Title", new { @class = "control-label col-md-2"})
+           <div class="col-md-10">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Event Title</label>
+            @Html.TextBoxFor(model => model.Title, new { placeholder = "Enter the title" })
+            <div class="col-md-10">
+            @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location)
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, "Start Date", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate)
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+            </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.StartDate, "Start Date", new { @class = "datepicker" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate)
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>  
+            </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartTime, "Start Time", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StartTime)
+                        @Html.ValidationMessageFor(model => model.StartTime)
+                    </div>
+                </div>
+         
+                 
+                @*<div class="form-group">
+            @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate)
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndTime)
+                @Html.ValidationMessageFor(model => model.EndTime)
+            </div>
+        </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, "Event Info", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+        <div class="form-group">
+            <label>Privacy Settings:</label> 
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.HideGuest, "Hide Guest List", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HideGuest)
+                    @Html.ValidationMessageFor(model => model.HideGuest)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InviteOtherGuest, "Invite other guests", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InviteOtherGuest)
+                    @Html.ValidationMessageFor(model => model.InviteOtherGuest)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Image)
+                    @Html.ValidationMessageFor(model => model.Image)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    
+    <div class="form-group">
+         <div class="col-md-offset-2 col-md-10">
+             <input type="button" value="Cancel" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+           </div>
+        </div>
+}
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $(".datepicker").each(function () { $(this).datepicker(); });
+        });
+    </script>*@

@@ -2,38 +2,63 @@
 @{
     ViewBag.Title = "Register";
 }
-
-<h2>@ViewBag.Title.</h2>
+@section Styles {
+    <link href="@Url.Content("~/assets/css/pages/page_log_reg_v2.css")" rel="stylesheet" type="text/css" />
+}
+@section JavaScript {
+    <!--<script type="text/javascript" src="@Url.Content("~/assets/plugins/countdown/jquery.countdown.js")"></script>-->
+    <script type="text/javascript" src="@Url.Content("~/assets/plugins/backstretch/jquery.backstretch.min.js")"></script>
+    <script type="text/javascript">
+        $.backstretch([
+          "/assets/img/bg/5.jpg",
+          "/assets/img/bg/4.jpg",
+        ], {
+            fade: 1000,
+            duration: 7000
+        });
+    </script>
+}
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <hr />
     @Html.ValidationSummary()
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    
+<div class="reg-block">
+    <div class="reg-block-header">
+        <h2>Sign Up</h2>
+        <ul class="list-inline style-icons text-center">
+            <li><a href="index.html"><i class="icon-home icon-round icon-round-sm icon-color-grey"></i></a></li>
+            <li><a href="#"><i class="icon-facebook icon-round icon-round-sm icon-color-grey"></i></a></li>
+            <li><a href="#"><i class="icon-twitter icon-round icon-round-sm icon-color-grey"></i></a></li>
+        </ul>
+        <p>Already Signed Up? Click <a class="color-green" href="page_login1.html">Sign In</a> to login your account.</p>
+    </div>
+
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-user"></i></span>
+        <!--<input type="text" class="form-control" placeholder="Username">-->
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username" })
+    </div>
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-envelope"></i></span>
+        <!--<input type="text" class="form-control" placeholder="Email">-->
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+    </div>
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-lock"></i></span>
+        <!--<input type="text" class="form-control" placeholder="Password">-->
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <!--<button type="submit" class="btn-u btn-block">Register</button>-->
+            <input type="submit" class="btn-u btn-block" value="Register" />
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+</div>
 }
+<!--End Reg Block-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
