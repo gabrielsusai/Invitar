@@ -80,7 +80,7 @@ namespace Invitar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,Title,Location,StartDate,StartTime,EndDate,EndTime,Description,HideGuest,InviteOtherGuest")] Event @event)
         {
-            if (ModelState.IsValid)
+          if (ModelState.IsValid)
             {
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
