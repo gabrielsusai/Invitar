@@ -11,7 +11,7 @@ namespace Invitar.Controllers
     {
         public ActionResult User()
         {
-            var events = (new ApplicationDbContext()).Events.ToList();
+            var events = (new ApplicationDbContext()).Events.Where(e=>e.IsSample==true).ToList();
             return View(events);
         }
 
