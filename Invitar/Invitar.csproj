@@ -161,6 +161,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BingSearchContainer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,6 +169,10 @@
     <Compile Include="Migrations\201403221819144_Initial.cs" />
     <Compile Include="Migrations\201403221819144_Initial.Designer.cs">
       <DependentUpon>201403221819144_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404051727045_userEmail.cs" />
+    <Compile Include="Migrations\201404051727045_userEmail.Designer.cs">
+      <DependentUpon>201404051727045_userEmail.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -997,6 +1002,11 @@
     <Content Include="Views\Event\Photo.cshtml" />
     <Content Include="Views\Event\_Themes.cshtml" />
     <Content Include="Views\Event\WebSearch.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -1009,6 +1019,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403221819144_Initial.resx">
       <DependentUpon>201403221819144_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404051727045_userEmail.resx">
+      <DependentUpon>201404051727045_userEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
