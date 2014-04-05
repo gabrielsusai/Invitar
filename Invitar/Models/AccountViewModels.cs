@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 namespace Invitar.Models
 {
     public class ExternalLoginConfirmationViewModel
@@ -64,4 +65,5 @@ namespace Invitar.Models
         //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         //public string ConfirmPassword { get; set; }
     }
-}
+   }
+
