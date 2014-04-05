@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201403221819144_Initial.Designer.cs">
       <DependentUpon>201403221819144_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404051727045_userEmail.cs" />
+    <Compile Include="Migrations\201404051727045_userEmail.Designer.cs">
+      <DependentUpon>201404051727045_userEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -975,9 +979,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\User.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -989,6 +991,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -1001,6 +1004,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403221819144_Initial.resx">
       <DependentUpon>201403221819144_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404051727045_userEmail.resx">
+      <DependentUpon>201404051727045_userEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
