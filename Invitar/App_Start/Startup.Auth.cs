@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Owin;
 
 namespace Invitar
@@ -28,9 +29,11 @@ namespace Invitar
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "238323909684342",
-               appSecret: "9f130a7b20f1bca8e0d01c72b6f114d2");
+            var foptions = new FacebookAuthenticationOptions();
+            foptions.AppId = "238323909684342";
+            foptions.AppSecret = "9f130a7b20f1bca8e0d01c72b6f114d2";
+            foptions.Scope.Add("email"); 
+            app.UseFacebookAuthentication(foptions);
 
             app.UseGoogleAuthentication();
         }

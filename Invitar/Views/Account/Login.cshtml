@@ -25,11 +25,7 @@
 <div class="reg-block">
     <div class="reg-block-header">
         <h2>Sign In</h2>
-        <ul class="list-inline style-icons text-center">
-            <li><a href="index.html"><i class="icon-home icon-round icon-round-sm icon-color-grey"></i></a></li>
-            <li><a href="#"><i class="icon-facebook icon-round icon-round-sm icon-color-grey"></i></a></li>
-            <li><a href="#"><i class="icon-twitter icon-round icon-round-sm icon-color-grey"></i></a></li>
-        </ul>
+        @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
     </div>
     <section id="loginForm">
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

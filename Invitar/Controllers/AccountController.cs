@@ -210,15 +210,48 @@ namespace Invitar.Controllers
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
+                Session["UserName"] = user.UserName;
+                Session["UserId"] = user.Id;
                 return RedirectToLocal(returnUrl);
             }
             else
             {
-                // If the user does not have an account, then prompt the user to create an account
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+
+                var email = GetExternalEmail();
+
+                user = new ApplicationUser() { UserName = loginInfo.DefaultUserName.Replace(".",string.Empty), Email = email };
+                var result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        Session["UserName"] = user.UserName;
+                        Session["UserId"] = user.Id;
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                AddErrors(result);
+                //// If the user does not have an account, then prompt the user to create an account
+                //ViewBag.ReturnUrl = returnUrl;
+                //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                //return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
             }
+            return View("ExternalLoginFailure");
+        }
+
+        private string GetExternalEmail()
+        {
+            var externalIdentity = HttpContext.GetOwinContext().Authentication.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+            var emailClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            return emailClaim.Value;
         }
 
         //
