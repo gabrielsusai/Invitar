@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Invitar.Models;
+using System.Configuration;
+using System.IO;
 
 namespace Invitar.Controllers
 {
@@ -114,6 +116,74 @@ namespace Invitar.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        #region "Image Actions"
+
+        public ActionResult Photo()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult Themes(string id)
+        {
+            var paths = new List<String>();
+            var dir = new DirectoryInfo(Server.MapPath(string.Format(@"~/assets/img/event/{0}", id)));
+            foreach (var d in dir.GetFiles())
+            {
+                paths.Add(string.Format("../../assets/img/event/{0}/{1}", id, Path.GetFileName(d.FullName)));
+            }
+
+            return PartialView("_Themes", paths);
+        }
+
+        [HttpPost]
+        public ActionResult SelectedImage(string src)
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public PartialViewResult WebSearch(string query)
+        {
+            var paths = MakeRequest(query);
+            return PartialView("WebSearch", paths);
+        }
+
+        static List<String> MakeRequest(string query)
+        {
+            var srcURL = new List<String>();
+            string AccountKey = ConfigurationManager.AppSettings["AccountKey"];
+
+            // Create a Bing container.
+            var bingContainer = new Bing.BingSearchContainer(new Uri(ConfigurationManager.AppSettings["BingSearchURL"]));
+
+            // The market to use.
+            string market = "en-us";
+
+            // Configure bingContainer to use your credentials.
+            bingContainer.Credentials = new NetworkCredential(AccountKey, AccountKey);
+
+
+            string imageFilters = "Size:Large";
+
+            // Build the query, limiting to 10 results.
+            var imageQuery = bingContainer.Image(query, null, market, null, null, null, imageFilters);
+
+            imageQuery = imageQuery.AddQueryOption("$top", 10);
+
+
+            // Run the query and display the results.
+            var imageResults = imageQuery.Execute();
+
+            foreach (var result in imageResults)
+            {
+                srcURL.Add(result.MediaUrl);
+            }
+            return srcURL;
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

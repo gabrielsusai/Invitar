@@ -49,8 +49,12 @@
             <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
         </div>
         <div class="tab-pane" id="ImageSearch-1">
-            <input type="text" id="txtSearch" value="" />
-            <input type="submit" id="btnSearch"  value="Search" />
+            <div class="input-group">
+                <input type="text" class="form-control" id="txtSearch" placeholder="Search" >
+                <span class="input-group-btn">
+                    <button class="btn-u" id="btnSearch" type="button">Go</button>
+                </span>
+            </div><!-- /input-group -->
             <div id="result" class="contentresult"></div>
         </div>
         <div class="tab-pane" id="Picasa-1">
