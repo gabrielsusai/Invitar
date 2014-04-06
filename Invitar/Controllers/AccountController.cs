@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Invitar.Models;
+using System.Web.Security;
 
 namespace Invitar.Controllers
 {
@@ -49,6 +50,8 @@ namespace Invitar.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+                    Session["UserName"] = user.UserName;
+                    Session["UserId"] = user.Id;
                     return RedirectToLocal(returnUrl);
                 }
                 else

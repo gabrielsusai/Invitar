@@ -12,7 +12,7 @@ using System.IO;
 
 namespace Invitar.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

@@ -9,6 +9,7 @@ namespace Invitar.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult User()
         {
             var events = (new ApplicationDbContext()).Events.Where(e=>e.IsSample==true).ToList();

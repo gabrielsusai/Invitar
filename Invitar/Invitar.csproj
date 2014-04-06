@@ -155,10 +155,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\SessionExpireAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="BingSearchContainer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventController.cs" />
