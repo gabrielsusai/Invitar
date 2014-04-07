@@ -1018,6 +1018,7 @@
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Home\User.cshtml" />
+    <Content Include="Views\Event\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

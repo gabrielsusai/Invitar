@@ -3,22 +3,10 @@
 }
 
 <h2>Photo</h2>
-<script type="text/x-jquery-tmpl" id="themes_template">
-    <div class="col-md-4">
-        <div class="thumbnails thumbnail-style thumbnail-kenburn">
-            <div class="thumbnail-img">
-                <div class="overflow-hidden">
-                    <img class="img-responsive" src="${image}" alt="">
-                </div>
-            </div>
-            <div class="caption">
-                <h3><a class="hover-effect" href="#">${name}</a></h3>
-            </div>
-        </div>
-    </div>
-</script>
 
-
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 <div class="tab-v2" >
     <ul class="nav nav-tabs">
         <li class="active"><a href="#themes-1" id="themes" data-toggle="tab">Themes</a></li>
@@ -62,4 +50,11 @@
             <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
         </div>
     </div>
+    @Html.Hidden("hdnimageSource", "hello")
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <input type="submit" class="btn-u btn-block" id="btnContinue" value="Continue" />
+        </div>
+    </div>
 </div>
+}

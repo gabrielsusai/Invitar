@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Invitar.Models;
 using System.Configuration;
 using System.IO;
+using System.Drawing;
 
 namespace Invitar.Controllers
 {
@@ -52,9 +53,10 @@ namespace Invitar.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(@event);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Events.Add(@event);
+                //db.SaveChanges();
+                Session["Event"] = @event;
+                return RedirectToAction("Photo");
             }
 
             return View(@event);
@@ -124,6 +126,33 @@ namespace Invitar.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Photo(string hdnimageSource)
+        {
+            var @event = (Event)Session["Event"];
+            if (@event == null) return View();
+
+            bool result = Uri.IsWellFormedUriString(hdnimageSource, UriKind.Absolute);
+
+            if(result) // for web url
+            {
+                var request = WebRequest.Create(hdnimageSource);
+                var response = request.GetResponse();
+                MemoryStream ms = new MemoryStream();
+                response.GetResponseStream().CopyTo(ms);
+                @event.Image = ms.ToArray();
+            }
+            else // for file system
+            {
+                var image = System.IO.File.ReadAllBytes(Server.MapPath(hdnimageSource));
+                @event.Image = image;
+            }
+
+            Session["Event"] = @event;
+
+            return RedirectToAction("Preview"); 
+        }
+
         [HttpGet]
         public PartialViewResult Themes(string id)
         {
@@ -131,7 +160,7 @@ namespace Invitar.Controllers
             var dir = new DirectoryInfo(Server.MapPath(string.Format(@"~/assets/img/event/{0}", id)));
             foreach (var d in dir.GetFiles())
             {
-                paths.Add(string.Format("../../assets/img/event/{0}/{1}", id, Path.GetFileName(d.FullName)));
+                paths.Add(string.Format("/assets/img/event/{0}/{1}", id, Path.GetFileName(d.FullName)));
             }
 
             return PartialView("_Themes", paths);
@@ -184,6 +213,22 @@ namespace Invitar.Controllers
         }
 
         #endregion
+
+        [HttpGet]
+        public ActionResult Preview()
+        {
+            var @event = (Event)Session["Event"];
+            return View(@event);
+        }
+
+        [HttpPost]
+        public ActionResult Preview(FormCollection collection)
+        {
+            var @event = (Event)Session["Event"];
+            db.Events.Add(@event);
+            db.SaveChanges();
+            return RedirectToAction("User", "Home");
+        }
 
         protected override void Dispose(bool disposing)
         {
