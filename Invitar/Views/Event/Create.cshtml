@@ -4,10 +4,18 @@
     ViewBag.Title = "Create an Invitation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section JavaScript {
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script>
+    $(document).ready(function () {
+        initializeGooglePlace();
+    });
+</script>
 
+}
 <h2>Create an Invitation</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -35,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Location)
+                @Html.TextBoxFor(model => model.Location, new { @onFocus = "geolocate()", placeholder = "e.g. Museum of Modern Art", @style="width:300px;", @class="location-name"})
                 @Html.ValidationMessageFor(model => model.Location)
             </div>
         </div>

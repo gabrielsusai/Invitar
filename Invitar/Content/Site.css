@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -101,3 +101,9 @@ div.contentresult .gallery li:hover img {
 
 div.contentresult .gallery img.selected-image {
   border: 3px solid red; }
+
+.location-name {
+background: white url(../assets/img/powered-by-google-on-white.png) center right no-repeat;
+padding-right: 109px;
+width: 306px;
+}
