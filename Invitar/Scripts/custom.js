@@ -22,6 +22,16 @@
     });
 
     
+    $('#btnContinue').click(function () {
+            var src = $('img.selected-image').attr("src");
+        if(src == null)
+        {
+            alert('Select an image');
+            return false;
+        }
+        $('#hdnimageSource').val(src);
+        return true;
+    });
 });
 
 var autocomplete;
