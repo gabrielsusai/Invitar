@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Invitar.Models.Event>
+
 @{
     ViewBag.Title = "Home Page";
 }
@@ -11,15 +12,17 @@
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
-<div class="col-md-9">
-    NO UPCOMING EVENTS
-</div>
-
 <div class="col-md-offset-2 col-md-10">
     <div style="position: absolute; bottom: 0; right: 0;">
         <input type="button" value="Create an Event" class="btn-u btn" onclick="@("window.location.href='" + @Url.Action("Create", "Event") + "'");" />
     </div>
 </div>
+
+<div class="col-md-9">
+    @Html.Partial("UpcomingEvent", Model.Where( e => e.IsSample == false ))
+</div>
+
+
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
@@ -31,28 +34,6 @@
 
 
 <div class="col-md-9">
-    <!-- Thumbnails v1 -->
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4">
-
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="../../assets/img/main/1.jpg" alt="" />
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">@item.Title</a></h3>
-                        <p>@item.Location</p>
-                        <p>@item.StartDate.ToShortDateString() at @item.StartTime</p>
-                    </div>
-                </div>
-            </div>
-
-        }
-    </div>
+    @Html.Partial("SampleEvent", Model.Where(e => e.IsSample == true))
     <hr class="margin-bottom-30">
 </div>

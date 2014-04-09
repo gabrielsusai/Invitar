@@ -12,7 +12,8 @@ namespace Invitar.Controllers
         [Authorize]
         public ActionResult User()
         {
-            var events = (new ApplicationDbContext()).Events.Where(e=>e.IsSample==true).ToList();
+            string userID = Session["UserId"].ToString();
+            var events = (new ApplicationDbContext()).Events.Where(e => e.IsSample == true || e.UserId == userID).ToList();
             return View(events);
         }
 

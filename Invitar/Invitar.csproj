@@ -1019,6 +1019,8 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Home\User.cshtml" />
     <Content Include="Views\Event\Preview.cshtml" />
+    <Content Include="Views\Home\SampleEvent.cshtml" />
+    <Content Include="Views\Home\UpcomingEvent.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
