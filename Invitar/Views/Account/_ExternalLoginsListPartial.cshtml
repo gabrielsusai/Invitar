@@ -2,39 +2,40 @@
 @{
     string action = Model.Action;
     string returnUrl = Model.ReturnUrl;
-    using (Html.BeginForm(action, "Account", new { ReturnUrl = returnUrl }))
-    {
-        @Html.AntiForgeryToken()
-        <ul class="list-inline style-icons text-center">
-            
-            <li>
-                <button type="submit" style="border:none;" id="facebook" name="provider" value="Facebook" title="Facebook">
-                    <i class="icon-facebook icon-round icon-round-sm icon-color-grey"></i>
-                </button>
-            </li>
-            <li>
-                <button type="submit" style="border:none;" id="google" name="provider" value="Google" title="Google">
-                    <i class="icon-google-plus icon-round icon-round-sm icon-color-grey"></i>
-                </button>
-            </li>
-        </ul>
-
+    <form id="login-launch" action="@Url.Action("ExternalLogin", "Account")" method="POST" target="login-popup" onsubmit="invokeLogin();">
+            @*using (Html.BeginForm(action, "Account", new { ReturnUrl = returnUrl , @onsubmit = "invokeLogin();"}))
+                //{*@
+            @Html.AntiForgeryToken()
+            <ul class="list-inline style-icons text-center">
+                <li><a href="index.html"><i class="icon-home icon-round icon-round-sm icon-color-grey"></i></a></li>
+                <li>
+                    <button type="submit" style="border:none;" id="facebook" name="provider" value="Facebook" title="Facebook">
+                        <i class="icon-facebook icon-round icon-round-sm icon-color-grey"></i>
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" style="border:none;" id="google" name="provider" value="Google" title="Google">
+                        <i class="icon-google-plus icon-round icon-round-sm icon-color-grey"></i>
+                    </button>
+                </li>
+            </ul>
+        </form>
         @*<div id="socialLoginList">
-                <p>
-                    @foreach (AuthenticationDescription p in loginProviders)
-                    {
-                        if (p.AuthenticationType == "Facebook")
-                        {
-                            <button type="submit" style="border:none;" class="btn btn-default" id="@p.AuthenticationType"
-                                    name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
-                    <img src="../../Images/fblogin.png" /></button>
-                        }
-                        else
-                        {
-                            <button type="submit" style="border:none;" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><img src="../../Images/glogin.png" /></button>
-                        }
-                    }
-                </p>
-            </div>*@
-    }
-}
+                         <p>
+                             @foreach (AuthenticationDescription p in loginProviders)
+                             {
+                                 if (p.AuthenticationType == "Facebook")
+                                 {
+                                     <button type="submit" style="border:none;" class="btn btn-default" id="@p.AuthenticationType"
+                                             name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                             <img src="../../Images/fblogin.png" /></button>
+                                 }
+                                 else
+                                 {
+                                     <button type="submit" style="border:none;" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><img src="../../Images/glogin.png" /></button>
+                                 }
+                             }
+                         </p>
+                     </div>
+            }*@
+        }

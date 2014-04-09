@@ -176,6 +176,19 @@
         <script src="assets/plugins/layer_slider/assets/js/html5.js"></script>
     <![endif]-->
 
+   
+    <script type="text/javascript">
+        function loginCallback(success, returnUrl) {
+            alert(returnUrl);
+            alert(success);
+            if (returnUrl) {
+                window.location.href = returnUrl;
+            } else {
+                window.location.href = "/Home/User"
+            }
+        }
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryajax")
     @*    @Scripts.Render("~/bundles/bootstrap")*@

@@ -65,5 +65,18 @@ namespace Invitar.Models
         //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         //public string ConfirmPassword { get; set; }
     }
+
+    public class LoginResultViewModel
+    {
+        public LoginResultViewModel(bool success, string returnUrl)
+        {
+            Success = success;
+            ReturnUrl = returnUrl;
+        }
+
+        public bool Success { get; set; }
+        public string ReturnUrl { get; set; }
+    }
+
    }
 

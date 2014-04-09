@@ -212,7 +212,8 @@ namespace Invitar.Controllers
                 await SignInAsync(user, isPersistent: false);
                 Session["UserName"] = user.UserName;
                 Session["UserId"] = user.Id;
-                return RedirectToLocal(returnUrl);
+                //return RedirectToLocal(returnUrl);
+                return View("LoginResult", new LoginResultViewModel(true, returnUrl));
             }
             else
             {
@@ -235,7 +236,8 @@ namespace Invitar.Controllers
                         await SignInAsync(user, isPersistent: false);
                         Session["UserName"] = user.UserName;
                         Session["UserId"] = user.Id;
-                        return RedirectToLocal(returnUrl);
+                        //return RedirectToLocal(returnUrl);
+                        return View("LoginResult", new LoginResultViewModel(true, returnUrl));
                     }
                 }
                 AddErrors(result);
@@ -309,7 +311,8 @@ namespace Invitar.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        return RedirectToLocal(returnUrl);
+                        //return RedirectToLocal(returnUrl);
+                        return View("LoginResult", new LoginResultViewModel(true, returnUrl));
                     }
                 }
                 AddErrors(result);

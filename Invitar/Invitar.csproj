@@ -1021,6 +1021,7 @@
     <Content Include="Views\Event\Preview.cshtml" />
     <Content Include="Views\Home\SampleEvent.cshtml" />
     <Content Include="Views\Home\UpcomingEvent.cshtml" />
+    <Content Include="Views\Account\Loginresult.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
