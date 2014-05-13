@@ -21,7 +21,7 @@ namespace Invitar.Models
         public bool HideGuest { get; set; }
         public bool InviteOtherGuest { get; set; }
         public byte[] Image { get; set; }
-        public ICollection<Invitee> Invitees { get; set; }
+        public virtual ICollection<Invitee> Invitees { get; set; }
         public bool IsSample { get; set; }
         public String UserId { get; set; }
         public IdentityUser User { get; set; }

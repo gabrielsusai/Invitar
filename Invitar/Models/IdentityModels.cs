@@ -14,6 +14,7 @@ namespace Invitar.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<Event> Events { get; set; }

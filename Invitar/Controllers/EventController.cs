@@ -231,7 +231,14 @@ namespace Invitar.Controllers
             return RedirectToAction("User", "Home");
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpGet]
+        public ActionResult ViewEvent(int eventID)
+        {
+            var @event = db.Events.Include("Invitees").Single(e=> e.Id== eventID);
+            return View(@event);
+        }
+
+       protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

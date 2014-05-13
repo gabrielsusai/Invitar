@@ -17,8 +17,9 @@
                         <div class="overflow-hidden">
                             <img class="img-responsive" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" alt="" />
                         </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
+                        @Html.ActionLink("ViewEvent", "ViewEvent", "Event", new { eventID = item.Id }, null)
+                        </div>
+
                     <div class="caption">
                         <h3><a class="hover-effect" href="#">@item.Title</a></h3>
                         <p>@item.Location</p>

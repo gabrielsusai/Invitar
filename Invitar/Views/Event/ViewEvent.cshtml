@@ -1,0 +1,50 @@
+﻿@model Invitar.Models.Event
+
+@{
+    ViewBag.Title = "ViewEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var base64 = Convert.ToBase64String(Model.Image);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row portfolio-item margin-bottom-50">
+        <!-- Carousel -->
+        <div class="col-md-7">
+            <div class="carousel slide carousel-v1" id="myCarousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="@imgSrc" height="615" width="973" />
+                        @*<div class="carousel-caption">
+                                <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Carousel -->
+        <!-- Content Info -->
+        <div class="col-md-5">
+            <h2>@Model.Title</h2>
+            <p>@Model.Location</p>
+            <ul class="list-unstyled">
+                @*<li><i class="icon-user color-green"></i> Jack Baur</li>*@
+                <li><i class="icon-calendar color-green"></i>@Model.StartDate.ToShortDateString() at @Model.StartTime</li>
+                @*<li><i class="icon-tags color-green"></i> Websites, Google, HTML5/CSS3</li>*@
+            </ul>
+            <p><input type="submit" value="Save" class="btn-u btn-u-large" />
+        </div>
+        <!-- End Content Info -->
+    </div><!--/row-->
+    
+    <div class="col-md-10">
+        <h2>Guest List</h2>
+        @foreach (var item in Model.Invitees)
+        {
+            <div>@item.Email</div>
+        }
+    </div>
+}
