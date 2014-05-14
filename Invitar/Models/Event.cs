@@ -25,5 +25,6 @@ namespace Invitar.Models
         public bool IsSample { get; set; }
         public String UserId { get; set; }
         public IdentityUser User { get; set; }
+
     }
 }

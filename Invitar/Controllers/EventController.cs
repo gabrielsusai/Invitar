@@ -11,6 +11,13 @@ using System.Configuration;
 using System.IO;
 using System.Drawing;
 
+using Google.GData.Contacts;
+using Google.GData.Client;
+using Google.GData.Extensions;
+using Google.Contacts;
+using System.Data;
+using System.Data.SqlClient;
+
 namespace Invitar.Controllers
 {
     public class EventController : BaseController
@@ -30,7 +37,7 @@ namespace Invitar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Invitar.Models.Event @event = db.Events.Find(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -49,7 +56,7 @@ namespace Invitar.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Location,StartDate,StartTime,Description,HideGuest,InviteOtherGuest")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,Title,Location,StartDate,StartTime,Description,HideGuest,InviteOtherGuest")] Invitar.Models.Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +76,7 @@ namespace Invitar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Invitar.Models.Event @event = db.Events.Find(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -82,7 +89,7 @@ namespace Invitar.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Location,StartDate,StartTime,EndDate,EndTime,Description,HideGuest,InviteOtherGuest")] Event @event)
+        public ActionResult Edit([Bind(Include = "Id,Title,Location,StartDate,StartTime,EndDate,EndTime,Description,HideGuest,InviteOtherGuest")] Invitar.Models.Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +107,7 @@ namespace Invitar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Invitar.Models.Event @event = db.Events.Find(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -113,7 +120,7 @@ namespace Invitar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
+            Invitar.Models.Event @event = db.Events.Find(id);
             db.Events.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -129,7 +136,7 @@ namespace Invitar.Controllers
         [HttpPost]
         public ActionResult Photo(string hdnimageSource)
         {
-            var @event = (Event)Session["Event"];
+            var @event = (Invitar.Models.Event)Session["Event"];
             if (@event == null) return View();
 
             bool result = Uri.IsWellFormedUriString(hdnimageSource, UriKind.Absolute);
@@ -217,18 +224,18 @@ namespace Invitar.Controllers
         [HttpGet]
         public ActionResult Preview()
         {
-            var @event = (Event)Session["Event"];
+            var @event = (Invitar.Models.Event)Session["Event"];
             return View(@event);
         }
 
         [HttpPost]
         public ActionResult Preview(FormCollection collection)
         {
-            var @event = (Event)Session["Event"];
+            var @event = (Invitar.Models.Event)Session["Event"];
             @event.UserId = Session["UserId"].ToString();
             db.Events.Add(@event);
             db.SaveChanges();
-            return RedirectToAction("User", "Home");
+            return RedirectToAction("AddInvitee", new { eventid = @event.Id });
         }
 
         [HttpGet]
@@ -245,6 +252,79 @@ namespace Invitar.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        public ActionResult AddInvitee(int eventID)
+        {
+            var ID = eventID;
+            TempData["EventID"] = eventID.ToString();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddInvitee(string inviteelist, int eventID, string button, string txtgmailusername, string txtPaswword)
+        {
+            if(button == "Submit")
+            { 
+                var invitees = inviteelist.Split(',');
+                Invitar.Models.Event @event = db.Events.Find(eventID);
+                @event.Invitees  = new List<Invitee>();
+            
+                for (int i = 0; i < invitees.Length; i++)
+                {
+                    Invitee invitee = new Invitee();
+                    invitee.Email = invitees[i].ToString();
+                    @event.Invitees.Add(invitee);
+                }
+                db.SaveChanges();
+                return RedirectToAction("User", "Home");
+            }
+            else if (button == "Import contact from gmail")
+            {
+                //return RedirectToAction("ImportGmailContact", "Event");
+                getcontacts(txtgmailusername, txtPaswword);
+            }
+            return RedirectToAction("User", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult ImportGmailContact()
+        {
+            return View();
+        }
+
+        public DataSet GetGmailContacts(string p_name, string e_id, string psw)
+        {
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            DataColumn dc = new DataColumn();
+            dc.DataType = Type.GetType("System.String");
+            dc.ColumnName = "emailid";
+            dt.Columns.Add(dc);
+            RequestSettings rs = new RequestSettings(p_name, e_id, psw);
+            rs.AutoPaging = true;
+            ContactsRequest cr = new ContactsRequest(rs);
+            Feed<Contact> f = cr.GetContacts();
+            foreach (Contact t in f.Entries)
+            {
+                foreach (EMail email in t.Emails)
+                {
+                    DataRow dr1 = dt.NewRow();
+                    dr1["emailid"] = email.Address.ToString();
+                    dt.Rows.Add(dr1);
+
+                }
+            }
+            ds.Tables.Add(dt);
+            return ds;
+
+        }
+
+        public void getcontacts(string username, string password)
+        {
+            DataSet ds = GetGmailContacts("invitar", username, password);
+            
         }
     }
 }
