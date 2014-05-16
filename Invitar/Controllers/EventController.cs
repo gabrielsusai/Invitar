@@ -263,7 +263,7 @@ namespace Invitar.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddInvitee(string inviteelist, int eventID, string button, string txtgmailusername, string txtPaswword)
+        public ActionResult AddInvitee(string inviteelist, int eventID, string button, string txtgmailusername, string txtPaswword, string[] lstgooglecontact)
         {
             if(button == "Submit")
             { 
@@ -277,13 +277,22 @@ namespace Invitar.Controllers
                     invitee.Email = invitees[i].ToString();
                     @event.Invitees.Add(invitee);
                 }
+                for (int i = 0; i < lstgooglecontact.Length; i++)
+                {
+                    Invitee invitee = new Invitee();
+                    invitee.Email = lstgooglecontact[i].ToString();
+                    @event.Invitees.Add(invitee);
+                }
+             
                 db.SaveChanges();
                 return RedirectToAction("User", "Home");
             }
             else if (button == "Import contact from gmail")
             {
                 //return RedirectToAction("ImportGmailContact", "Event");
-                getcontacts(txtgmailusername, txtPaswword);
+                ViewData.Add("gmailContacts", new SelectList(getcontacts(txtgmailusername, txtPaswword)));
+               // getcontacts(txtgmailusername, txtPaswword);
+                return View();
             }
             return RedirectToAction("User", "Home");
         }
@@ -294,14 +303,15 @@ namespace Invitar.Controllers
             return View();
         }
 
-        public DataSet GetGmailContacts(string p_name, string e_id, string psw)
+        public List<string> GetGmailContacts(string p_name, string e_id, string psw)
         {
-            DataSet ds = new DataSet();
-            DataTable dt = new DataTable();
-            DataColumn dc = new DataColumn();
-            dc.DataType = Type.GetType("System.String");
-            dc.ColumnName = "emailid";
-            dt.Columns.Add(dc);
+            List<string> lstemail = new List<string>();
+           // DataSet ds = new DataSet();
+          //  DataTable dt = new DataTable();
+            //DataColumn dc = new DataColumn();
+            //dc.DataType = Type.GetType("System.String");
+            //dc.ColumnName = "emailid";
+            //dt.Columns.Add(dc);
             RequestSettings rs = new RequestSettings(p_name, e_id, psw);
             rs.AutoPaging = true;
             ContactsRequest cr = new ContactsRequest(rs);
@@ -310,21 +320,23 @@ namespace Invitar.Controllers
             {
                 foreach (EMail email in t.Emails)
                 {
-                    DataRow dr1 = dt.NewRow();
-                    dr1["emailid"] = email.Address.ToString();
-                    dt.Rows.Add(dr1);
+                    //DataRow dr1 = dt.NewRow();
+                    //dr1["emailid"] = email.Address.ToString();
+                   // dt.Rows.Add(dr1);
+                    lstemail.Add(email.Address.ToString());
 
                 }
             }
-            ds.Tables.Add(dt);
-            return ds;
+            //ds.Tables.Add(dt);
+            return lstemail;
 
         }
 
-        public void getcontacts(string username, string password)
+        public  List<string> getcontacts(string username, string password)
         {
-            DataSet ds = GetGmailContacts("invitar", username, password);
-            
+            List<string> lstemail = new List<string>();
+            lstemail = GetGmailContacts("invitar", username, password);
+            return lstemail;
         }
     }
 }

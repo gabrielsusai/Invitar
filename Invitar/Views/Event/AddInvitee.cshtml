@@ -28,6 +28,11 @@
                 @Html.Password("txtPaswword")
 
                 <input type="submit" value="Import contact from gmail" name="button" class="btn-u btn-u-blue" />
+                @if (ViewData["gmailContacts"] != null)
+                { @Html.ListBox("lstgooglecontact", ViewData["gmailContacts"] as MultiSelectList); 
+                }
+                
+
             </form>
         </div>
     </div>
