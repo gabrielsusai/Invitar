@@ -5,101 +5,85 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section JavaScript {
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script>
-    $(document).ready(function () {
-        initializeGooglePlace();
-    });
-</script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script>
+        $(document).ready(function () {
+            initializeGooglePlace();
+        });
+    </script>
 
 }
-<h2>Create an Invitation</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Event</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-       <div class="form-group">
-           @Html.LabelFor(model => model.Title, "Event Title", new { @class = "control-label col-md-2" })
-           <div class="col-md-10">
-               @Html.TextBoxFor(model => model.Title, new { placeholder = "Enter the title of your event", @style="width:300px;" })
-            @Html.ValidationMessageFor(model => model.Title)
-            </div>
-       </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Location, new { @onFocus = "geolocate()", placeholder = "e.g. Museum of Modern Art", @style="width:300px;", @class="location-name"})
-                @Html.ValidationMessageFor(model => model.Location)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, "Start Date", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.StartDate, new { placeholder = "MM/DD/YYYY" })
-                @Html.ValidationMessageFor(model => model.StartDate)
-            </div>
-            </div>
+<div class="panel panel-grey margin-bottom-40" style="width:80%;">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="width:200px;"><i class="icon-tasks"></i>Create an Invitation</h3>
+        <div>@Html.ActionLink("Back to List", "User", "Home")</div>
+        
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "EventController",FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
 
             <div class="form-group">
-                    @Html.LabelFor(model => model.StartTime, "Start Time", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.StartTime)
-                        @Html.ValidationMessageFor(model => model.StartTime)
+                @Html.LabelFor(model => model.Title, "Event Title", new { @class = "control-label col-md-2" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Title, new { placeholder = "Enter the title of your event", @style = "width:300px;" })
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Location, new { @onFocus = "geolocate()", placeholder = "e.g. Museum of Modern Art", @style = "width:300px;", @class = "location-name" })
+                    @Html.ValidationMessageFor(model => model.Location)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, "Start Date", new { @class = "control-label col-md-2" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.StartDate, new { placeholder = "MM/DD/YYYY" })
+                    @Html.ValidationMessageFor(model => model.StartDate)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Event Info", new { @class = "control-label col-md-2" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Description, new { placeholder = "Enter the information about your event", @style = "width:300px;" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <div class="checkbox">
+                        <label>
+                            @Html.EditorFor(model => model.HideGuest)
+                            @Html.LabelFor(model => model.HideGuest, "Hide Guest List")
+                            @Html.ValidationMessageFor(model => model.HideGuest)
+                        </label>
                     </div>
                 </div>
-         
-               <div class="form-group">
-                    @Html.LabelFor(model => model.Description, "Event Info", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Description, new { placeholder = "Enter the information about your event", @style = "width:300px;" })
-                        @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <div class="checkbox">
+                        <label>
+                            @Html.EditorFor(model => model.InviteOtherGuest)
+                            @Html.LabelFor(model => model.InviteOtherGuest, "Invite other guests")
+                            @Html.ValidationMessageFor(model => model.InviteOtherGuest)
+                        </label>
                     </div>
                 </div>
-        <div class="form-group">
-            <label>Privacy Settings:</label> 
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.HideGuest, "Hide Guest List", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.HideGuest)
-                    @Html.ValidationMessageFor(model => model.HideGuest)
+                <div class="col-lg-offset-2 col-lg-10">
+                    <input type="submit" value="Submit" class="btn-u btn-u-sea" />
+                    <input type="button" value="Cancel" class="btn-u btn-u-orange" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.InviteOtherGuest, "Invite other guests", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.InviteOtherGuest)
-                    @Html.ValidationMessageFor(model => model.InviteOtherGuest)
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Image)
-                    @Html.ValidationMessageFor(model => model.Image)
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                    <input type="button" value="Cancel" class="btn btn-default" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
-                </div>
-            </div>
-        </div>
-    
-}
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+        }
+    </div>
+</div>
+<div>
+  
+</div>
