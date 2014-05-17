@@ -940,6 +940,7 @@
     <Content Include="Images\fb.png" />
     <Content Include="Images\fblogin.png" />
     <Content Include="Images\glogin.png" />
+    <Content Include="Invite.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />

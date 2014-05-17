@@ -241,17 +241,20 @@ namespace Invitar.Controllers
         [HttpGet]
         public ActionResult ViewEvent(int eventID)
         {
-            var @event = db.Events.Include("Invitees").Single(e=> e.Id== eventID);
+            var @event = db.Events.Include("Invitees").Single(e => e.Id == eventID);
             return View(@event);
         }
 
-       protected override void Dispose(bool disposing)
+        private void SendEmail(string email, string eventTitle, string body)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+            message.To.Add(email);
+            message.Subject = "Invitar Invitation: " + eventTitle;
+            message.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["NoReply"]);
+            message.IsBodyHtml = true;
+            message.Body = body;
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTPSERVER"]);
+            smtp.Send(message);
         }
 
         [HttpGet]
@@ -265,12 +268,12 @@ namespace Invitar.Controllers
         [HttpPost]
         public ActionResult AddInvitee(string inviteelist, int eventID, string button, string txtgmailusername, string txtPaswword, string[] lstgooglecontact)
         {
-            if(button == "Submit")
-            { 
+            if (button == "Submit")
+            {
                 var invitees = inviteelist.Split(',');
                 Invitar.Models.Event @event = db.Events.Find(eventID);
-                @event.Invitees  = new List<Invitee>();
-            
+                @event.Invitees = new List<Invitee>();
+
                 for (int i = 0; i < invitees.Length; i++)
                 {
                     Invitee invitee = new Invitee();
@@ -283,18 +286,39 @@ namespace Invitar.Controllers
                     invitee.Email = lstgooglecontact[i].ToString();
                     @event.Invitees.Add(invitee);
                 }
-             
+
                 db.SaveChanges();
+
+                var body = ConstructInviteEmail(@event);
+
+                // Send email to all the invitees in this event.
+                foreach (var item in @event.Invitees)
+                {
+                    SendEmail(item.Email, @event.Title, body);
+                }
+
                 return RedirectToAction("User", "Home");
             }
             else if (button == "Import contact from gmail")
             {
                 //return RedirectToAction("ImportGmailContact", "Event");
                 ViewData.Add("gmailContacts", new SelectList(getcontacts(txtgmailusername, txtPaswword)));
-               // getcontacts(txtgmailusername, txtPaswword);
+                // getcontacts(txtgmailusername, txtPaswword);
                 return View();
             }
             return RedirectToAction("User", "Home");
+        }
+
+        private string ConstructInviteEmail(Invitar.Models.Event @event)
+        {
+            var body = string.Format(System.IO.File.ReadAllText(Server.MapPath("~/Invite.html")),
+            (string)Session["UserName"],
+            @event.Title,
+            @event.StartDate.ToLongDateString(),
+            @event.StartTime,
+            @event.Location,
+            ConfigurationManager.AppSettings["URL"] + @event.Id);
+            return body;
         }
 
         [HttpGet]
@@ -306,12 +330,6 @@ namespace Invitar.Controllers
         public List<string> GetGmailContacts(string p_name, string e_id, string psw)
         {
             List<string> lstemail = new List<string>();
-           // DataSet ds = new DataSet();
-          //  DataTable dt = new DataTable();
-            //DataColumn dc = new DataColumn();
-            //dc.DataType = Type.GetType("System.String");
-            //dc.ColumnName = "emailid";
-            //dt.Columns.Add(dc);
             RequestSettings rs = new RequestSettings(p_name, e_id, psw);
             rs.AutoPaging = true;
             ContactsRequest cr = new ContactsRequest(rs);
@@ -320,19 +338,16 @@ namespace Invitar.Controllers
             {
                 foreach (EMail email in t.Emails)
                 {
-                    //DataRow dr1 = dt.NewRow();
-                    //dr1["emailid"] = email.Address.ToString();
-                   // dt.Rows.Add(dr1);
                     lstemail.Add(email.Address.ToString());
 
                 }
             }
-            //ds.Tables.Add(dt);
+
             return lstemail;
 
         }
 
-        public  List<string> getcontacts(string username, string password)
+        public List<string> getcontacts(string username, string password)
         {
             List<string> lstemail = new List<string>();
             lstemail = GetGmailContacts("invitar", username, password);

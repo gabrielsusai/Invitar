@@ -86,6 +86,8 @@ namespace Invitar.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
+                    Session["UserName"] = user.UserName;
+                    Session["UserId"] = user.Id;
                     return RedirectToAction("User", "Home");
                 }
                 else
