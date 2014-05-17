@@ -44,9 +44,13 @@
     <div class="top">
         <div class="container">
             <ul class="loginbar pull-right">
-                <li><a href="page_faq.html">Help</a></li>
-                <li class="devider"></li>
                 @Html.Partial("_LoginPartial")
+@if (!Request.IsAuthenticated)
+{
+
+                <li class="devider"></li>
+                <li><b><a href="page_faq.html">Help</a></b></li>
+}
             </ul>
         </div>
     </div><!--/top-->

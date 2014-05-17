@@ -4,18 +4,19 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-    <li class="devider"></li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+     <ul class="loginbar pull-right">
+        <li> <b>@Html.Label("Hello " + User.Identity.GetUserName() + "!")</b></li>
+        <li class="devider"></li>
+        <li><b><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></b></li>
+         <li class="devider"></li>
+         <li><b><a href="page_faq.html">Help</a></b></li>
+     </ul>
     }
 }
 else
 {
 
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li class="devider"></li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><b>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</b></li>
+        <li class="devider"></li>
+        <li><b>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</b></li>
 }

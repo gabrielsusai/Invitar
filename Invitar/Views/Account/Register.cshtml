@@ -22,37 +22,36 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @*@Html.ValidationSummary()*@
     
 <div class="reg-block">
     <div class="reg-block-header">
         <h2>Sign Up</h2>
-        <ul class="list-inline style-icons text-center">
-            <li><a href="index.html"><i class="icon-home icon-round icon-round-sm icon-color-grey"></i></a></li>
-            <li><a href="#"><i class="icon-facebook icon-round icon-round-sm icon-color-grey"></i></a></li>
-            <li><a href="#"><i class="icon-twitter icon-round icon-round-sm icon-color-grey"></i></a></li>
-        </ul>
-        <p>Already Signed Up? Click <a class="color-green" href="page_login1.html">Sign In</a> to login your account.</p>
+        <p>Already Signed Up? Click @Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) to login your account.</p>
+        
     </div>
 
     <div class="input-group margin-bottom-20">
         <span class="input-group-addon"><i class="icon-user"></i></span>
-        <!--<input type="text" class="form-control" placeholder="Username">-->
         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username" })
+        @Html.ValidationMessageFor(m => m.UserName)
     </div>
     <div class="input-group margin-bottom-20">
-        <span class="input-group-addon"><i class="icon-envelope"></i></span>
-        <!--<input type="text" class="form-control" placeholder="Email">-->
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+        <div>
+            <span class="input-group-addon"><i class="icon-envelope"></i></span>
+        </div>
+        <div>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
     </div>
     <div class="input-group margin-bottom-20">
         <span class="input-group-addon"><i class="icon-lock"></i></span>
-        <!--<input type="text" class="form-control" placeholder="Password">-->
         @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+        @Html.ValidationMessageFor(m => m.Password)
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <!--<button type="submit" class="btn-u btn-block">Register</button>-->
             <input type="submit" class="btn-u btn-block" value="Register" />
         </div>
     </div>
