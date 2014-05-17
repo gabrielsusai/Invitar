@@ -56,7 +56,7 @@ namespace Invitar.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("Password", "Invalid username or password.");
                 }
             }
 
