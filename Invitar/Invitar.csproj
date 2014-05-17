@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1038,6 +1039,8 @@
     <Content Include="Views\Event\ViewEvent.cshtml" />
     <Content Include="Views\Event\AddInvitee.cshtml" />
     <Content Include="Views\Event\ImportGmailContact.cshtml" />
+    <Content Include="Views\Response\Index.cshtml" />
+    <Content Include="Views\Shared\_OtherLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,94 @@
+﻿@model Invitar.Models.Event
+
+@{
+    ViewBag.Title = "Response";
+    Layout = "~/Views/Shared/_OtherLayout.cshtml";
+
+    var base64 = Convert.ToBase64String(Model.Image);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+<style type="text/css">
+    #bg {
+        position: relative;
+        top: 0;
+        left: 0;
+        /* Preserve aspet ratio */
+        min-width: 100%;
+        min-height: 100%;
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div style="position:relative;">
+        <img style="float:left;" src="@imgSrc" id="bg" height="700" width="900" />
+
+        <!--Begin Content-->
+        <div style="position:absolute;top:0;left:0;padding-left:10px;padding-top:100px;z-index:5;" class="col-md-9">
+            <!--Service Blcoks -->
+            <div class="row servive-block margin-bottom-10">
+                <div id="divY" class="col-md-3 col-sm-6">
+                    <div class="servive-block-in servive-block-colored servive-block-green">
+                        <h4>Great!</h4>
+                        <div><i class="icon-bell"></i></div>
+                        <p>See you in party</p>
+                        <h5>How many?</h5><input type="text" class="form-control" maxlength="2" id="txtTotal" style="width:30px !important" />
+                        <input type="submit" class="btn-u btn-block" style="width:20px !important"  value="Go" />
+                    </div>
+                </div>
+                <div id="divN" class="col-md-3 col-sm-6">
+                    <div class="servive-block-in servive-block-colored servive-block-red">
+                        <h4>Miss you!</h4>
+                        <div><i class="icon-bullhorn"></i></div>
+                        <p>We will miss you. Hope you will change your decision</p>
+                    </div>
+                </div>
+                <div id="divM" class="col-md-3 col-sm-6">
+                    <div class="servive-block-in servive-block-colored servive-block-yellow">
+                        <h4>Really?</h4>
+                        <div><i class="icon-map-marker"></i></div>
+                        <p>See if you can make it. Hope you will change your decision</p>
+                    </div>
+                </div>
+
+            </div><!--/servive-block-->
+        </div>
+        <!--End Content-->
+    </div>
+}
+
+<script type="text/javascript" src="~/assets/plugins/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divY").show();
+        $("#divN").show();
+        $("#divM").show();
+
+        var res = GetQueryStringParams('res');
+
+        if (res == 'Y') {
+            $("#divN").hide();
+            $("#divM").hide();
+        }
+        else if (res == 'N') {
+            $("#divY").hide();
+            $("#divM").hide();
+        }
+        else if (res == 'M') {
+            $("#divN").hide();
+            $("#divY").hide();
+        }
+    });
+    function GetQueryStringParams(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+</script>

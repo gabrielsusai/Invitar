@@ -289,12 +289,10 @@ namespace Invitar.Controllers
 
                 db.SaveChanges();
 
-                var body = ConstructInviteEmail(@event);
-
                 // Send email to all the invitees in this event.
                 foreach (var item in @event.Invitees)
                 {
-                    SendEmail(item.Email, @event.Title, body);
+                    SendEmail(item.Email, @event.Title, ConstructInviteEmail(@event, item.Id));
                 }
 
                 return RedirectToAction("User", "Home");
@@ -309,7 +307,7 @@ namespace Invitar.Controllers
             return RedirectToAction("User", "Home");
         }
 
-        private string ConstructInviteEmail(Invitar.Models.Event @event)
+        private string ConstructInviteEmail(Invitar.Models.Event @event, int inviteeID)
         {
             var body = string.Format(System.IO.File.ReadAllText(Server.MapPath("~/Invite.html")),
             (string)Session["UserName"],
@@ -317,7 +315,7 @@ namespace Invitar.Controllers
             @event.StartDate.ToLongDateString(),
             @event.StartTime,
             @event.Location,
-            ConfigurationManager.AppSettings["URL"] + @event.Id);
+            string.Format(ConfigurationManager.AppSettings["URL"] + "eventID={0}&inviteeID={1}", @event.Id, inviteeID));
             return body;
         }
 
