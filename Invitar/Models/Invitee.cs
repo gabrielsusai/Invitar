@@ -12,6 +12,7 @@ namespace Invitar.Models
         public string Email { get; set; }
         public InviteResponse? Response { get; set; }
         public int? Count { get; set; }
+        public string Comment { get; set; }
     }
     public enum InviteResponse
     {

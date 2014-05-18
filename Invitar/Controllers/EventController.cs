@@ -280,13 +280,15 @@ namespace Invitar.Controllers
                     invitee.Email = invitees[i].ToString();
                     @event.Invitees.Add(invitee);
                 }
-                for (int i = 0; i < lstgooglecontact.Length; i++)
+                if (lstgooglecontact != null)
                 {
-                    Invitee invitee = new Invitee();
-                    invitee.Email = lstgooglecontact[i].ToString();
-                    @event.Invitees.Add(invitee);
+                    for (int i = 0; i < lstgooglecontact.Length; i++)
+                    {
+                        Invitee invitee = new Invitee();
+                        invitee.Email = lstgooglecontact[i].ToString();
+                        @event.Invitees.Add(invitee);
+                    }
                 }
-
                 db.SaveChanges();
 
                 // Send email to all the invitees in this event.

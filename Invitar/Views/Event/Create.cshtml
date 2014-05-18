@@ -21,7 +21,7 @@
         
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Create", "EventController",FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "Event",FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 

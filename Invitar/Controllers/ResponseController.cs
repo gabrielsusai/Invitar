@@ -11,15 +11,28 @@ namespace Invitar.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(int eventID)
+        [HttpGet]
+        public ActionResult Index(int eventID, int inviteeID, int? res)
         {
             var @event = db.Events.Single(e => e.Id == eventID);
             return View(@event);
         }
 
-        public ActionResult Index(int eventID, int inviteeID, string res)
+        [HttpPost]
+        public ActionResult Index(int eventID, int inviteeID, int res, string total, string comment)
         {
-
+            if (!string.IsNullOrEmpty(total))
+            {
+                var @event = db.Events.Single(e => e.Id == eventID);
+                if (inviteeID > 0)
+                {
+                    var invitee = @event.Invitees.Single(i => i.Id == inviteeID);
+                    invitee.Response = (InviteResponse)Enum.Parse(typeof(InviteResponse), res.ToString());
+                    invitee.Count = int.Parse(total);
+                    invitee.Comment = comment;
+                    db.SaveChanges();
+                }
+            }
             return Content("Thanks for your response!");
         }
 	}

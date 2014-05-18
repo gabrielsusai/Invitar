@@ -29,26 +29,30 @@
             <!--Service Blcoks -->
             <div class="row servive-block margin-bottom-10">
                 <div id="divY" class="col-md-3 col-sm-6">
-                    <div class="servive-block-in servive-block-colored servive-block-green">
+                    <div class="servive-block-in servive-block-colored servive-block-green" style="width:250px;">
                         <h4>Great!</h4>
                         <div><i class="icon-bell"></i></div>
-                        <p>See you in party</p>
-                        <h5>How many?</h5><input type="text" class="form-control" maxlength="2" id="txtTotal" style="width:30px !important" />
-                        <input type="submit" class="btn-u btn-block" style="width:20px !important"  value="Go" />
-                    </div>
+                        
+                            <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" id="comment" ></textarea>
+                            <h5>Total Guest:</h5><input type="text" class="form-control" maxlength="2" id="Total" style="width:30px !important" />
+                            <input type="submit" class="btn-u btn-block" style="width:40px !important" value="Reply" />
+</div>
                 </div>
                 <div id="divN" class="col-md-3 col-sm-6">
                     <div class="servive-block-in servive-block-colored servive-block-red">
                         <h4>Miss you!</h4>
                         <div><i class="icon-bullhorn"></i></div>
-                        <p>We will miss you. Hope you will change your decision</p>
+                        <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" id="comment"></textarea>
+                        <input type="submit" class="btn-u btn-block" style="width:20px !important" value="Reply" />
                     </div>
                 </div>
                 <div id="divM" class="col-md-3 col-sm-6">
                     <div class="servive-block-in servive-block-colored servive-block-yellow">
                         <h4>Really?</h4>
                         <div><i class="icon-map-marker"></i></div>
-                        <p>See if you can make it. Hope you will change your decision</p>
+                        <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" id="comment"></textarea>
+                        <h5>Total Guest:</h5><input type="text" class="form-control" maxlength="2" id="Total" style="width:30px !important" />
+                        <input type="submit" class="btn-u btn-block" style="width:20px !important" value="Reply" />
                     </div>
                 </div>
 
@@ -68,15 +72,15 @@
 
         var res = GetQueryStringParams('res');
 
-        if (res == 'Y') {
+        if (res == 1) {
             $("#divN").hide();
             $("#divM").hide();
         }
-        else if (res == 'N') {
+        else if (res == 2) {
             $("#divY").hide();
             $("#divM").hide();
         }
-        else if (res == 'M') {
+        else if (res == 3) {
             $("#divN").hide();
             $("#divY").hide();
         }
