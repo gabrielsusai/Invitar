@@ -10,14 +10,14 @@
     {
         foreach (var item in Model)
         {
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
-                            <img class="img-responsive" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" alt="" />
+                            <img class="img-responsive" style="width:22em; height:15em;" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" alt="" />
                         </div>
-                        @Html.ActionLink("ViewEvent", "ViewEvent", "Event", new { eventID = item.Id }, null)
+                        @Html.ActionLink("View", "ViewEvent", "Event", new { eventID = item.Id }, new {@class ="btn-more hover-effect" })
                         </div>
 
                     <div class="caption">

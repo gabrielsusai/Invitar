@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="col-md-9">
+<div class="col-md-12">
     @Html.Partial("UpcomingEvent", Model.Where( e => e.IsSample == false ))
 </div>
 
@@ -33,7 +33,7 @@
 <!--=== End Breadcrumbs ===-->
 
 
-<div class="col-md-9">
+<div class="col-md-12">
     @Html.Partial("SampleEvent", Model.Where(e => e.IsSample == true))
     <hr class="margin-bottom-30">
 </div>

@@ -3,12 +3,12 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-4">
+        <div class="col-md-3">
 
             <div class="thumbnails thumbnail-style thumbnail-kenburn">
                 <div class="thumbnail-img">
                     <div class="overflow-hidden">
-                        <img class="img-responsive" src="../../assets/img/main/1.jpg" alt="" />
+                        <img class="img-responsive" style="width:22em; height:15em;"  src=@string.Format("../../assets/img/main/{0}.jpg",item.Id) alt="" />
                     </div>
                     <a class="btn-more hover-effect" href="#">View</a>
                 </div>
