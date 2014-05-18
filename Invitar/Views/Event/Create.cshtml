@@ -16,8 +16,8 @@
 
 <div class="panel panel-grey margin-bottom-40" style="width:80%;">
     <div class="panel-heading">
-        <h3 class="panel-title" style="width:200px;"><i class="icon-tasks"></i>Create an Invitation</h3>
-        <div>@Html.ActionLink("Back to List", "User", "Home")</div>
+        <h3 class="panel-title" style="width: 200px; float: left;"><i class="icon-tasks"></i>Create an Invitation</h3>
+        <div style="text-align:right;">@Html.ActionLink("Back to List", "User", "Home")</div>
         
     </div>
     <div class="panel-body">
@@ -44,6 +44,13 @@
                 <div class="col-lg-10">
                     @Html.TextBoxFor(model => model.StartDate, new { placeholder = "MM/DD/YYYY" })
                     @Html.ValidationMessageFor(model => model.StartDate)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartTime, "Start Time", new { @class = "control-label col-md-2" })
+                <div class="col-lg-10">
+                    @Html.EditorFor(model => model.StartTime)
+                    @Html.ValidationMessageFor(model => model.StartTime)
                 </div>
             </div>
             <div class="form-group">
