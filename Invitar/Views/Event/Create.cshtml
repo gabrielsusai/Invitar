@@ -61,14 +61,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StartTime, "Start Time", new { @class = "control-label col-md-2"})
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(model => model.StartTime, new { placeholder = "Time", @style = "width:85px;" })
+                    @Html.TextBoxFor(model => model.StartTime, new { placeholder = "12:00 pm", @style = "width:85px;" })
                     @Html.ValidationMessageFor(model => model.StartTime)
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, "Event Info", new { @class = "control-label col-md-2" })
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(model => model.Description, new { placeholder = "Enter the information about your event", @style = "width:300px;" })
+                    @Html.TextAreaFor(model => model.Description, 5, 50, new { placeholder = "Share more detailed information about your upcoming event", @style = "width:500px;" })
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
             </div>
@@ -96,13 +96,11 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                    <input type="submit" value="Submit" class="btn-u btn-u-sea" />
                     <input type="button" value="Cancel" class="btn-u btn-u-orange" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+                    <input type="submit" value="Continue" class="btn-u btn-u-sea" />
                 </div>
             </div>
         }
     </div>
 </div>
-<div>
-  
-</div>
+

@@ -1,60 +1,74 @@
 ﻿@{
     ViewBag.Title = "Choose a cover photo";
 }
+<div class="panel panel-grey margin-bottom-40" style="width:95%;">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="icon-tasks"></i>Choose a cover photo</h3>
+    </div>
+    <div class="panel-body">
 
-<h2>Photo</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="tab-v2">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#themes-1" id="themes" data-toggle="tab">Themes</a></li>
-            <li><a href="#computer-1" data-toggle="tab">Computer</a></li>
-            <li><a href="#ImageSearch-1" data-toggle="tab">Image Search</a></li>
-            <li><a href="#Picasa-1" data-toggle="tab">Picasa</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="themes-1">
-                <div class="contentresult" id="content">
-                    <ul class="gallery">
-                        <li>
-                            <a data-ajax="true" data-ajax-method="Get" data-ajax-mode="replace" data-ajax-update="#content" href="/Event/Themes/bday">
-                                <img class="img-responsive" style="border-radius:15px; width:22em; height:15em;" src="~/assets/img/event/bday/1.jpg" alt="Birthday">
-                            </a>
-                        </li>
-                        <li>
-                            <a data-ajax="true" data-ajax-method="Get" data-ajax-mode="replace" data-ajax-update="#content" href="/Event/Themes/dinner">
-                                <img class="img-responsive" style="border-radius: 15px; width: 22em; height: 15em;" src="~/assets/img/event/dinner/1.jpg" alt="Birthday">
-                            </a>
-                        </li>
-                    </ul>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="tab-v1">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#themes-1" id="themes" data-toggle="tab">Themes</a></li>
+                    <li><a href="#computer-1" data-toggle="tab">Computer</a></li>
+                    <li><a href="#ImageSearch-1" data-toggle="tab">Image Search</a></li>
+                    <li><a href="#Picasa-1" data-toggle="tab">Picasa</a></li>
+                </ul>
+                <div class="tab-content" style="padding:0; overflow: scroll; overflow-x:hidden; height:450px;">
+                    <div class="tab-pane active" id="themes-1">
+                        <div class="margin-bottom-4"></div>
+                        <div class="contentresult" id="content" style=" margin-top: 1%; ">
+                            <ul class="gallery">
+                                <li>
+                                    <a data-ajax="true" data-ajax-method="Get" data-ajax-mode="replace" data-ajax-update="#content" href="/Event/Themes/bday">
+                                        <img class="img-responsive" style="border-radius:15px; width:22em; height:15em;" src="~/assets/img/event/bday/1.jpg" alt="Birthday">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-ajax="true" data-ajax-method="Get" data-ajax-mode="replace" data-ajax-update="#content" href="/Event/Themes/dinner">
+                                        <img class="img-responsive" style="border-radius: 15px; width: 22em; height: 15em;" src="~/assets/img/event/dinner/1.jpg" alt="Birthday">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="computer-1">
+                        <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/5.jpg">
+                        <h4>Heading Sample 2</h4>
+                        <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                    </div>
+                    <div class="tab-pane" id="ImageSearch-1">
+                        <div class="row" style="margin-top:1.5%;">
+                            <div class="col-md-4" style="margin-left: 5.3333333%">
+                                <div class="margin-bottom-4"></div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtSearch" placeholder="Bing Search">
+                                    <span class="input-group-btn">
+                                        <button class="btn-u" id="btnSearch" type="button">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="result" class="contentresult"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Picasa-1">
+                        <h4>Heading Sample 4</h4>
+                        <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                    </div>
+                </div>
+                @Html.Hidden("hdnimageSource", "hello")
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-8" style="text-align:center">
+                        <input type="button" value="Back" class="btn-u btn-u-blue" onclick="@("window.location.href='" + @Url.Action("Create", "Event") + "'");" />
+                        <input type="submit" id="btnContinue" value="Continue" class="btn-u btn-u-sea" />
+                    </div>
                 </div>
             </div>
-            <div class="tab-pane" id="computer-1">
-                <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/5.jpg">
-                <h4>Heading Sample 2</h4>
-                <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
-            </div>
-            <div class="tab-pane" id="ImageSearch-1">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="txtSearch" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn-u" id="btnSearch" type="button">Go</button>
-                    </span>
-                </div><!-- /input-group -->
-                <div id="result" class="contentresult"></div>
-            </div>
-            <div class="tab-pane" id="Picasa-1">
-                <h4>Heading Sample 4</h4>
-                <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
-            </div>
-        </div>
-        @Html.Hidden("hdnimageSource", "hello")
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <input type="submit" class="btn-u btn-block" id="btnContinue" value="Continue" />
-            </div>
-        </div>
+        }
     </div>
-}
+</div>
