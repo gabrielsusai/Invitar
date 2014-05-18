@@ -17,6 +17,7 @@ using Google.GData.Extensions;
 using Google.Contacts;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Invitar.Controllers
 {
@@ -273,10 +274,11 @@ namespace Invitar.Controllers
                 var invitees = inviteelist.Split(',');
                 Invitar.Models.Event @event = db.Events.Find(eventID);
                 @event.Invitees = new List<Invitee>();
-
+                TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
                 for (int i = 0; i < invitees.Length; i++)
                 {
                     Invitee invitee = new Invitee();
+                    invitee.Name = textInfo.ToTitleCase(invitees[i].ToString().Split('@')[0].Replace(".", " ").Replace("_", " "));     
                     invitee.Email = invitees[i].ToString();
                     @event.Invitees.Add(invitee);
                 }
@@ -285,6 +287,7 @@ namespace Invitar.Controllers
                     for (int i = 0; i < lstgooglecontact.Length; i++)
                     {
                         Invitee invitee = new Invitee();
+                        invitee.Name = textInfo.ToTitleCase(lstgooglecontact[i].ToString().Split('@')[0].Replace(".", " ").Replace("_", " "));     
                         invitee.Email = lstgooglecontact[i].ToString();
                         @event.Invitees.Add(invitee);
                     }
