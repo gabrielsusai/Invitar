@@ -5,35 +5,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddInvitee</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="panel panel-blue margin-bottom-40">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="icon-tasks"></i> Add </h3>
+            <h3 class="panel-title"><i class="icon-tasks"></i> Add Invitee</h3>
         </div>
         <div class="panel-body">
-            <form class="margin-bottom-40" role="form">
-                <div class="form-group">
-                    <label for="Inviteelist">Email address</label>
-                    @Html.TextArea("inviteelist", new {@rows = "7", @class = "form-control" })
-                    
-                    @Html.Hidden("eventID",TempData["eventID"])
+        <div class="row margin-bottom-40">
+            <!--Basic Example-->
+            <div class="col-md-6">
+                <h4>Enter Email Address</h4>
+                <div class="input-group">
+                    @Html.TextArea("inviteelist", new { @placeholder = "Enter email addresses separated by commas", @rows = "11", @class = "form-control", @style = "width:475px;" })
+                    @Html.Hidden("eventID", TempData["eventID"])
                 </div>
-                <input type="submit" value="Submit" name="button" class="btn-u btn-u-blue" />
-                 
-                @Html.TextBox("txtgmailusername")
-                @Html.Password("txtPaswword")
+                <div class="margin-bottom-10"></div>
+            </div>
+            <!--End Basic Example-->
+            <!--Checkboxes and Radio Addons-->
+            <div class="col-md-5">
 
-                <input type="submit" value="Import contact from gmail" name="button" class="btn-u btn-u-blue" />
-                @if (ViewData["gmailContacts"] != null)
-                { @Html.ListBox("lstgooglecontact", ViewData["gmailContacts"] as MultiSelectList); 
-                }
-                
+                <h4>Import Contacts from your Gmail</h4>
+                <div class="panel panel-yellow ">
+                    <div class="panel-body" style="text-align:center">
+                        @if (ViewData["gmailContacts"] != null)
+                        { <div class="form-group">
+                              <label for="exampleInputEmail1">Email address (Use ctrl key to do multiple selection)</label>
+                            <div class="input-group" style="width:100%">          
+                                @Html.ListBox("lstgooglecontact", ViewData["gmailContacts"] as MultiSelectList, new { @rows = "11", @Style = "height:158px;" });
+                            </div>
+                            <div class="margin-bottom-20"></div>
+                        </div>
+                        }
+                        else
+                        { 
+                            <div class="input-group" style="width:100%">
 
-            </form>
+                                <img src="~/assets/img/logo_gmail.png" style="width:100px;" />
+                            </div>
+
+                            <div class="margin-bottom-20"></div>
+                            <div class="input-group" style="width:100%;text-align:center;">
+
+                                <input type="text" name="txtgmailusername" id="txtgmailusername" class="form-control" style="width:250px;" placeholder="Email" />
+
+                            </div>
+
+                            <div class="margin-bottom-20"></div>
+
+                            <div class="input-group" style="width:100%;text-align:center;">
+                                 <input type="password" name="txtPaswword" id="txtPaswword" class="form-control" style="width:250px;" placeholder="Password" />
+                                 <br/>@Html.ValidationMessage("InvalidCredentials")
+                            </div>
+                            <div class="margin-bottom-20"></div>
+
+                            <div class="input-group" style ="width:100%;text-align:center;">
+                                <input type="submit" value="Sign In" name="button" class="btn-u btn-u-blue" />
+                            </div>
+                            <div class="margin-bottom-10"></div>
+                        }
+                    </div>
+                </div>
+            </div>               <!--End Checkboxes and Radio Addons-->
+        </div>
+            <div class="row" style="width:100%; text-align:center;">
+                <div>
+                    <div class="input-group" style="width:100%; text-align:center;">
+                        <input type="submit" value="Send Invite" name="button" class="btn-u btn-u-sea" />
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 }

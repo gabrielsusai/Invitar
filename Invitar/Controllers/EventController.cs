@@ -297,11 +297,18 @@ namespace Invitar.Controllers
 
                 return RedirectToAction("User", "Home");
             }
-            else if (button == "Import contact from gmail")
+            else if (button == "Sign In")
             {
-                //return RedirectToAction("ImportGmailContact", "Event");
-                ViewData.Add("gmailContacts", new SelectList(getcontacts(txtgmailusername, txtPaswword)));
-                // getcontacts(txtgmailusername, txtPaswword);
+                try
+                {
+                    //return RedirectToAction("ImportGmailContact", "Event");
+                    ViewData.Add("gmailContacts", new SelectList(getcontacts(txtgmailusername, txtPaswword)));
+                    // getcontacts(txtgmailusername, txtPaswword);
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("InvalidCredentials", "Invalid Email or Password.");
+                }
                 return View();
             }
             return RedirectToAction("User", "Home");
@@ -327,20 +334,21 @@ namespace Invitar.Controllers
 
         public List<string> GetGmailContacts(string p_name, string e_id, string psw)
         {
-            List<string> lstemail = new List<string>();
-            RequestSettings rs = new RequestSettings(p_name, e_id, psw);
-            rs.AutoPaging = true;
-            ContactsRequest cr = new ContactsRequest(rs);
-            Feed<Contact> f = cr.GetContacts();
-            foreach (Contact t in f.Entries)
-            {
-                foreach (EMail email in t.Emails)
+           
+                List<string> lstemail = new List<string>();
+                RequestSettings rs = new RequestSettings(p_name, e_id, psw);
+                rs.AutoPaging = true;
+                ContactsRequest cr = new ContactsRequest(rs);
+                Feed<Contact> f = cr.GetContacts();
+                foreach (Contact t in f.Entries)
                 {
-                    lstemail.Add(email.Address.ToString());
+                    foreach (EMail email in t.Emails)
+                    {
+                        lstemail.Add(email.Address.ToString());
 
+                    }
                 }
-            }
-
+        
             return lstemail;
 
         }

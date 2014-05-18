@@ -313,6 +313,7 @@
     <Content Include="assets\img\icons\social\yahoo.png" />
     <Content Include="assets\img\icons\social\youtube.png" />
     <Content Include="assets\img\img.jpg" />
+    <Content Include="assets\img\invitar.png" />
     <Content Include="assets\img\logo1-blue.png" />
     <Content Include="assets\img\logo1-default.png" />
     <Content Include="assets\img\logo1-light.png" />
@@ -323,6 +324,7 @@
     <Content Include="assets\img\logo2-light.png" />
     <Content Include="assets\img\logo2-orange.png" />
     <Content Include="assets\img\logo2-red.png" />
+    <Content Include="assets\img\logo_gmail.png" />
     <Content Include="assets\img\main\1.jpg" />
     <Content Include="assets\img\main\10.jpg" />
     <Content Include="assets\img\main\11.jpg" />
@@ -357,6 +359,7 @@
     <Content Include="assets\img\posts\1.jpg" />
     <Content Include="assets\img\posts\2.jpg" />
     <Content Include="assets\img\posts\3.jpg" />
+    <Content Include="assets\img\powered-by-google-on-white.png" />
     <Content Include="assets\img\sliders\elastislide\1.jpg" />
     <Content Include="assets\img\sliders\elastislide\10.jpg" />
     <Content Include="assets\img\sliders\elastislide\11.jpg" />

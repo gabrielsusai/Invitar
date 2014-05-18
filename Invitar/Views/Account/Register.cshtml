@@ -37,15 +37,11 @@
         @Html.ValidationMessageFor(m => m.UserName)
     </div>
     <div class="input-group margin-bottom-20">
-        <div class="input-group-addon" style="height: 40px; display: block; vertical-align: middle;">
-            <i class="icon-envelope"></i></div><i class="icon-envelope"></i>
-        </div>
-           <div>
+            <span class="input-group-addon"><i class="icon-envelope"></i></span>
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
             @Html.ValidationMessageFor(m => m.Email)
-        </div>
-    </div>
-    <div class="input-group margin-bottom-20">
+     </div>
+     <div class="input-group margin-bottom-20">
         <span class="input-group-addon"><i class="icon-lock"></i></span>
         @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
         @Html.ValidationMessageFor(m => m.Password)
