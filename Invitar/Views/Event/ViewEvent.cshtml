@@ -1,4 +1,5 @@
 ﻿@model Invitar.Models.Event
+@using Invitar.Models;
 
 @{
     ViewBag.Title = "ViewEvent";
@@ -30,16 +31,57 @@
             <ul class="list-unstyled">
                 <li><i class="icon-calendar color-green"></i>@Model.StartDate.ToShortDateString() at @Model.StartTime</li>
             </ul>
-            <p><input type="submit" value="Save" class="btn-u btn-u-large" />
+            <h2>GUEST LIST</h2>
+            <ul class="list-unstyled" >
+                <h4 style="background-color:gray;color:white;width:250px;">YES</h4>
+                @foreach (var item in Model.Invitees.Where(r => r.Response == InviteResponse.Yes))
+                {
+                    <li><i class="icon-user"></i> @item.Name</li>
+                }
+            </ul>
+            <ul class="list-unstyled">
+                <h4 style="background-color: gray; color: white; width: 250px;">NO</h4>
+                @foreach (var item in Model.Invitees.Where(r => r.Response == InviteResponse.No))
+                {
+                    <li><i class="icon-user"></i> @item.Name</li>
+                }
+            </ul>
+            <ul class="list-unstyled" >
+                <h4 style="background-color: gray; color: white; width: 250px;">MAYBE</h4>
+                @foreach (var item in Model.Invitees.Where(r => r.Response == InviteResponse.Maybe))
+                {
+                    <li><i class="icon-user"></i> @item.Name</li>
+                }
+            </ul>
+
+            <ul class="list-unstyled">
+                <h4 style="background-color: gray; color: white; width: 250px;">DID NOT RSVP</h4>
+                @foreach (var item in Model.Invitees.Where(r => r.Response == null))
+                {
+                    <li><i class="icon-user"></i> @item.Name</li>
+                }
+            </ul>
+
+            
+
+            <h4 style="background-color: gray; color: white; width: 250px;">COMMENTS</h4>
+
+            @foreach (var item in Model.Invitees.Where(r => !string.IsNullOrEmpty(r.Comment)))
+            {
+                <div class="testimonial-info">
+                    <img src="assets/img/testimonials/img1.jpg" alt="">
+                    <span class="testimonial-author">
+                        @item.Name
+                        <em>@item.Comment</em>
+                    </span>
+                </div>
+            }
+
         </div>
         <!-- End Content Info -->
     </div><!--/row-->
-    
+
     <div class="col-md-10">
-        <h2>Guest List</h2>
-        @foreach (var item in Model.Invitees)
-        {
-            <div>@item.Email</div>
-        }
+
     </div>
 }

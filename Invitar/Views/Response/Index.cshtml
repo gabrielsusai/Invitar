@@ -28,30 +28,33 @@
         <div style="position:absolute;top:0;left:0;padding-left:10px;padding-top:100px;z-index:5;" class="col-md-9">
             <!--Service Blcoks -->
             <div class="row servive-block margin-bottom-10">
-                <div id="divY" class="col-md-3 col-sm-6">
-                    <div class="servive-block-in servive-block-colored servive-block-green">
+                <div id="divY" class="col-md-3 col-sm-6" style="width:260px !important;">
+                    <div class="servive-block-in servive-block-colored servive-block-green" style="width:250px; ">
                         <h4>Great!</h4>
                         <div><i class="icon-bell"></i></div>
-                        <p>See you in party</p>
-                        <h5>How many?</h5><input type="text" class="form-control" maxlength="2" id="txtTotal" style="width:30px !important" />
-                        <input type="submit" class="btn-u btn-block" style="width:20px !important"  value="Go" />
+                        <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" name="commentyes" id="commentyes"></textarea>
+                        <h5>Total Guest:</h5><input type="text" class="form-control" maxlength="2" id="totalyes" name="totalyes" style="width:50px !important" />
+                        <input type="submit" onclick="return SetResponse(1)" class="btn-u btn-block" style="width:60px !important" value="Reply" />
                     </div>
                 </div>
-                <div id="divN" class="col-md-3 col-sm-6">
-                    <div class="servive-block-in servive-block-colored servive-block-red">
+                <div id="divN" class="col-md-3 col-sm-6" style="width:260px !important;">
+                    <div class="servive-block-in servive-block-colored servive-block-red" style="width: 250px;">
                         <h4>Miss you!</h4>
                         <div><i class="icon-bullhorn"></i></div>
-                        <p>We will miss you. Hope you will change your decision</p>
+                        <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" name="commentno" id="commentno"></textarea>
+                        <input type="submit" onclick="return SetResponse(2)"  class="btn-u btn-block" style="width:60px !important" value="Reply" />
                     </div>
                 </div>
-                <div id="divM" class="col-md-3 col-sm-6">
-                    <div class="servive-block-in servive-block-colored servive-block-yellow">
+                <div id="divM" class="col-md-3 col-sm-6" style="width:260px !important;">
+                    <div class="servive-block-in servive-block-colored servive-block-yellow" style="width: 250px;">
                         <h4>Really?</h4>
                         <div><i class="icon-map-marker"></i></div>
-                        <p>See if you can make it. Hope you will change your decision</p>
+                        <h5>Add a comment:</h5><textarea rows="3" cols="50" class="form-control" name="commentmaybe" id="commentmaybe"></textarea>
+                        <h5>Total Guest:</h5><input type="text" class="form-control" maxlength="2" id="totalmaybe" name="totalmaybe" style="width:50px !important" />
+                        <input type="submit" onclick="return SetResponse(3)"  class="btn-u btn-block" style="width:60px !important" value="Reply" />
                     </div>
                 </div>
-
+            <input type="hidden" id="hdnres" name="res" />
             </div><!--/servive-block-->
         </div>
         <!--End Content-->
@@ -68,15 +71,15 @@
 
         var res = GetQueryStringParams('res');
 
-        if (res == 'Y') {
+        if (res == 1) {
             $("#divN").hide();
             $("#divM").hide();
         }
-        else if (res == 'N') {
+        else if (res == 2) {
             $("#divY").hide();
             $("#divM").hide();
         }
-        else if (res == 'M') {
+        else if (res == 3) {
             $("#divN").hide();
             $("#divY").hide();
         }

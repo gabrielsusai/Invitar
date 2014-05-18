@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201404052011361_UserIdinEvents.Designer.cs">
       <DependentUpon>201404052011361_UserIdinEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405180151066_AddedComment.cs" />
+    <Compile Include="Migrations\201405180151066_AddedComment.Designer.cs">
+      <DependentUpon>201405180151066_AddedComment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -1067,6 +1071,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404052011361_UserIdinEvents.resx">
       <DependentUpon>201404052011361_UserIdinEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405180151066_AddedComment.resx">
+      <DependentUpon>201405180151066_AddedComment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

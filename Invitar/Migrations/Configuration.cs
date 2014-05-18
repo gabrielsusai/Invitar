@@ -16,6 +16,7 @@ namespace Invitar.Migrations
         protected override void Seed(Invitar.Models.ApplicationDbContext context)
         {
             String userid = null;
+            context.Database.ExecuteSqlCommand("Delete from Invitees");
             context.Database.ExecuteSqlCommand("Delete from Events");
             context.Events.AddOrUpdate(
                 new Event { Title="Birthday", Location="1501 St Paul Street", StartDate= DateTime.Now.AddDays(-10), StartTime = DateTime.Now.ToString("hh:mm tt"), Description ="First Birthday", HideGuest=false, InviteOtherGuest= false , Image= new byte[]{}, IsSample =true, UserId = userid  },

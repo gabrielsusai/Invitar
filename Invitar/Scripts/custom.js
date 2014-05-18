@@ -34,6 +34,12 @@
     });
 });
 
+
+function SetResponse(res)
+{
+    $('#hdnres').val(res);
+    return true;
+}
 var autocomplete;
 
 function initializeGooglePlace() {
