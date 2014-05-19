@@ -4,34 +4,38 @@
     ViewBag.Title = "Home Page";
 }
 
-<!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
-    <div class="container">
-        <h1 class="pull-left">Upcoming Events</h1>
-    </div>
-</div><!--/breadcrumbs-->
-<!--=== End Breadcrumbs ===-->
+@section JavaScript {
+<script type="text/javascript" src="~/Scripts/jquery.corner.js"></script>
 
-<div class="col-md-offset-2 col-md-10">
+<script>
+    $(document).ready(function () {
+        $('.overflow-hidden').corner("round 18px").parent().css('padding', '4px').corner("round 10px");
+    });
+</script>
+}
+
+<style type="text/css">
+    .rounded-corners {
+        height: 65px;
+        width: 160px;
+        -moz-border-radius-bottomright: 50px;
+        border-bottom-right-radius: 50px;
+    }
+</style>
+
+
+<br/>
+
+<div class="col-md-offset-2 col-md-9">
     <div style="position: absolute; bottom: 0; right: 0;">
-        <input type="button" value="Create an Event" class="btn-u btn" onclick="@("window.location.href='" + @Url.Action("Create", "Event") + "'");" />
+        <input type="button" value="Create an Event" class="btn-u btn-u-large" onclick="@("window.location.href='" + @Url.Action("Create", "Event") + "'");" />
     </div>
 </div>
+<br />
 
 <div class="col-md-12">
     @Html.Partial("UpcomingEvent", Model.Where( e => e.IsSample == false ))
 </div>
-
-
-
-<!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
-    <div class="container">
-        <h1 class="pull-left">Sample Events</h1>
-    </div>
-</div><!--/breadcrumbs-->
-<!--=== End Breadcrumbs ===-->
-
 
 <div class="col-md-12">
     @Html.Partial("SampleEvent", Model.Where(e => e.IsSample == true))
