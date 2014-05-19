@@ -269,7 +269,7 @@ namespace Invitar.Controllers
         [HttpPost]
         public ActionResult AddInvitee(string inviteelist, int eventID, string button, string txtgmailusername, string txtPaswword, string[] lstgooglecontact)
         {
-            if (button == "Submit")
+            if (button == "Send Invite")
             {
                 var invitees = inviteelist.Split(',');
                 Invitar.Models.Event @event = db.Events.Find(eventID);

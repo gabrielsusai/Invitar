@@ -31,6 +31,7 @@
             <ul class="list-unstyled">
                 <li><i class="icon-calendar color-green"></i>@Model.StartDate.ToShortDateString() at @Model.StartTime</li>
             </ul>
+            @Html.ActionLink("Invite more?", "AddInvitee", new { eventID  = Model.Id}) <br/> 
             <h2>GUEST LIST</h2>
             <ul class="list-unstyled" >
                 <h4 style="background-color:gray;color:white;width:250px;">YES</h4>
